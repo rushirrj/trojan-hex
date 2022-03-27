@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: MIT
+//SPDX-License-Identifier: GPL-3.0
  
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.4.0/contracts/token/ERC20/ERC20.sol";
  
@@ -29,7 +29,15 @@ contract Disaster is ERC20{
         uint amount;
         uint requestState; 
     }
- 
+
+    struct affiliatedTo {
+        string typeOfAffiliation;
+        address contractAddress;
+    }
+    
+    //address affiliated to disaster
+    mapping(address => affiliatedTo) public affiliatedToDisaster; 
+    
     //token balances mapping
     mapping(address => uint256) balances;
  
@@ -84,7 +92,7 @@ contract Disaster is ERC20{
     }
  
     //initialises the Disaster contract and minting ERC20 Help tokens
-     constructor(address _admin, string memory _cause) ERC20("VOLUNTEERS", "HELP")  {
+    constructor(address _admin, string memory _cause) ERC20("VOLUNTEERS", "HELP")  {
         _mint(msg.sender, 1e18*10000);
         balances[address(this)] = 1e18*10000;
         admin = _admin;
@@ -106,6 +114,10 @@ contract Disaster is ERC20{
     function giveAccessToNGO(address _NGO, string memory _name) public onlyAdmin {
         NGO[_NGO] = true;
         getNGO[_NGO] = _name;
+        affiliatedTo storage newAffiliation;
+        newAffiliation.typeOfAffiliation = "NGO";
+        newAffiliation.contractAddress = address(this);
+        affiliatedToDisaster[_NGO] = newAffiliation;
     }
  
     //Giving accress to supervisor
@@ -113,6 +125,10 @@ contract Disaster is ERC20{
         appointedSupervisors[_supervisor] = true;
         supervisors[_supervisor] = msg.sender;
         getSupervisor[_supervisor] = _name;
+        affiliatedTo storage newAffiliation;
+        newAffiliation.typeOfAffiliation = "SUPERVISOR";
+        newAffiliation.contractAddress = address(this);
+        affiliatedToDisaster[_supervisor] = newAffiliation;
     }
  
  
@@ -144,6 +160,10 @@ contract Disaster is ERC20{
         require(!volunteers[_volunteer], "Volunteer already appointed");
         volunteers[_volunteer] = true;
         getVolunteers[_volunteer] = _name;
+        affiliatedTo storage newAffiliation;
+        newAffiliation.typeOfAffiliation = "VOLUNTEER";
+        newAffiliation.contractAddress = address(this);
+        affiliatedToDisaster[_volunteer] = newAffiliation;
     }
  
     //add community hours to volunteers
@@ -160,7 +180,7 @@ contract Disaster is ERC20{
         balances[msg.sender] = balances[msg.sender].add(amount*1000000000000000000);
         emit Transfer(address(this), msg.sender, amount*1000000000000000000);
     }
- 
+    
  
  
 }
