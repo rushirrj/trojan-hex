@@ -6,7 +6,7 @@ const CreateNGO = () => {
 
   const contractAddress = '0x2c3bC0015567C7139F7A1BEC0254aEBFCeA4fBaa';
   const contract = intializeContract(abiArray, contractAddress);
-
+  const adminAddress = '0xabE45d16e0390b9611098a2A58d25484D75d6F6E';
 
   const [inputs, setinputs] = useState({
     name: "",
@@ -20,9 +20,7 @@ const CreateNGO = () => {
   const createNGO = async () =>{
     console.log(inputs.name, inputs.address);
     
-    
-    // const NgoAddress = '0xabE45d16e0390b9611098a2A58d25484D75d6F6E';
-    const adminAddress = '0xabE45d16e0390b9611098a2A58d25484D75d6F6E';
+
     const createNewNgo = await contract.methods.giveAccessToNGO(inputs.address, inputs.name).send({from : adminAddress});
     console.log(createNewNgo);
     setinputs({
@@ -35,7 +33,7 @@ const CreateNGO = () => {
   //address => array of NGO
   const getNGO = async () => {
     
-    const adminAddress = '0xabE45d16e0390b9611098a2A58d25484D75d6F6E';
+    
 
     const getSize = await contract.methods.getSizeOffetchNGO().call();
 
@@ -56,7 +54,7 @@ const CreateNGO = () => {
     const getSize = await contract.methods.getSizeOffetchRequests().call();
     console.log(getSize);
     for(let i = 0; i < getSize; i++){
-      let request = await contract.methods.requests('0xabE45d16e0390b9611098a2A58d25484D75d6F6E', i).call();
+      let request = await contract.methods.requests(adminAddress, i).call();
       console.log(request);
     }
   }
