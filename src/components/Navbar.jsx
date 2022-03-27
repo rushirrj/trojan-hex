@@ -30,6 +30,9 @@ const Navbar = () => {
           <Link to="/ngo">
             <a class="mr-5 hover:text-white">NGO</a>
           </Link>
+          <Link to="/supervisor">
+            <a class="mr-5 hover:text-white">Supervisor</a>
+          </Link>
         </nav>
         <button
           onClick={() => {
