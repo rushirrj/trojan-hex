@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import abiArray from "../../utils/abiArray.json";
 import { getAccountID, intializeContract } from "../../utils/connectWallet";
 import { Link } from "react-router-dom";
@@ -8,10 +8,11 @@ const CreateVolunteer = () => {
     name: "",
     address: "",
   });
+  const [adminAddress, setAdminAddress] = useState("");
+  const [volunters, setVolunters] = useState([]);
   const contractAddress = "0x21cb42De23aFac678CeD8482E04D4B3699288767";
   const contract = intializeContract(abiArray, contractAddress);
-  const adminAddress = getAccountID();
-
+  console.log(adminAddress);
   const onChange = (e) => {
     setinputs({ ...inputs, [e.target.name]: e.target.value });
   };
@@ -31,22 +32,43 @@ const CreateVolunteer = () => {
       .send({ from: adminAddress });
     console.log(getSupplies);
   };
-
-  //
+  console.log(adminAddress);
   const getAllVolunteers = async (Supervisor_address) => {
     const getSize = await contract.methods
-      .getSizeOffetchVolunteers(address)
+      .getSizeOffetchVolunteers(Supervisor_address)
       .call();
+    let volunteersArr = [];
     for (let i = 0; i < getSize; i++) {
       let volunteer = await contract.methods
         .fetchVolunteers(Supervisor_address, i)
         .call();
+      console.log(volunteer);
       let volunteer_name = await contract.methods
         .getVolunteers(volunteer)
         .call();
-      console.log(volunteer, volunteer_name);
+      console.log(volunteer_name);
+      let vhrs = await contract.methods
+        .volunteerWorkHours(adminAddress, volunteer)
+        .call();
+      console.log(vhrs);
+      volunteersArr.push({
+        volunteerID: volunteer,
+        volunteerName: volunteer_name,
+        volunteerHours: vhrs,
+      });
     }
+    setVolunters(volunteersArr);
   };
+  useEffect(() => {
+    getAccountID()
+      .then((id) => {
+        setAdminAddress(id);
+        getAllVolunteers(id);
+      })
+      .catch((err) => {
+        console.log(err + "Something went wrong");
+      });
+  }, []);
 
   return (
     <>
@@ -88,7 +110,12 @@ const CreateVolunteer = () => {
                 className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
-            <button className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            <button
+              onClick={() => {
+                createVolunteer(inputs.address, inputs.name);
+              }}
+              className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            >
               Submit
             </button>
           </div>
@@ -138,78 +165,25 @@ const CreateVolunteer = () => {
                 Volunteer Name
               </th>
               <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                Address
+                Volunteer Address
               </th>
-              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                Rewards
+              <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
+                Volunteer Hours
               </th>
-              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                Community Hours
-              </th>
-              <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="px-4 py-3">Ajit NGO</td>
-              <td className="px-4 py-3">
-                0xe3B3f5ace203d5659eEb0133dec972921ca9bB21
-              </td>
-              <td className="px-4 py-3 text-lg text-gray-900">Free</td>
-              <td className="px-4 py-3 text-lg text-gray-900">6hrs</td>
-              <td className="w-10 text-center">
-                <input name="plan" type="radio" />
-              </td>
-            </tr>
-            <tr>
-              <td className="border-t-2 border-gray-200 px-4 py-3">RRJ NGO</td>
-              <td className="border-t-2 border-gray-200 px-4 py-3">
-                0xe3B3f5ace203d5659eEb0133dec972921ca9bB21
-              </td>
-              <td className="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                $24
-              </td>
-              <td className="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                10hrs
-              </td>
-              <td className="border-t-2 border-gray-200 w-10 text-center">
-                <input name="plan" type="radio" />
-              </td>
-            </tr>
-            <tr>
-              <td className="border-t-2 border-gray-200 px-4 py-3">
-                Tejas PIRO Coder
-              </td>
-              <td className="border-t-2 border-gray-200 px-4 py-3">
-                0xe3B3f5ace203d5659eEb0133dec972921ca9bB21
-              </td>
-              <td className="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                $50
-              </td>
-              <td className="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                5hrs
-              </td>
-              <td className="border-t-2 border-gray-200 w-10 text-center">
-                <input name="plan" type="radio" />
-              </td>
-            </tr>
-            <tr>
-              <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">
-                Ashutosh
-              </td>
-              <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">
-                0xe3B3f5ace203d5659eEb0133dec972921ca9bB21
-              </td>
-              <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                $72
-              </td>
-              <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                7hrs
-              </td>
-              <td className="border-t-2 border-b-2 border-gray-200 w-10 text-center">
-                <input name="plan" type="radio" />
-              </td>
-            </tr>
+            {volunters.length > 0 ? (
+              volunters.map((v) => (
+                <tr>
+                  <td className="px-4 py-3">{v.volunteerName}</td>
+                  <td className="px-4 py-3">{v.volunteerID}</td>
+                  <td className="px-4 py-3">{v.volunteerHours}</td>
+                </tr>
+              ))
+            ) : (
+              <p>No Data Found</p>
+            )}
           </tbody>
         </table>
       </div>
