@@ -13,6 +13,7 @@ const CreateNGO = () => {
     address: "",
   });
   const [ngo, setNgo] = useState([]);
+  const [requests, setRequests] = useState([]);
 
   const onChange = (e) => {
     setinputs({ ...inputs, [e.target.name]: e.target.value });
@@ -20,7 +21,6 @@ const CreateNGO = () => {
 
   const createNGO = async () => {
     console.log(inputs.name, inputs.address);
-
     const createNewNgo = await contract.methods
       .giveAccessToNGO(inputs.address, inputs.name)
       .send({ from: adminAddress });
@@ -44,12 +44,15 @@ const CreateNGO = () => {
 
   //address => array of request(struct)
   const getRequest = async () => {
+    let requestarr = [];
     const getSize = await contract.methods.getSizeOffetchRequests().call();
     console.log(getSize);
     for (let i = 0; i < getSize; i++) {
       let request = await contract.methods.requests(adminAddress, i).call();
       console.log(request);
+      requestarr.push(request);
     }
+    setRequests(requestarr);
   };
 
   return (
