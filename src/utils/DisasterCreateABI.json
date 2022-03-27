@@ -1,0 +1,34 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "cause",
+				"type": "string"
+			}
+		],
+		"name": "createDisaster",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "disasters",
+		"outputs": [
+			{
+				"internalType": "contract Disaster",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
