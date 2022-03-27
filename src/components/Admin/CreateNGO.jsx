@@ -6,7 +6,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 const CreateNGO = () => {
   const contractAddress = "0x2c3bC0015567C7139F7A1BEC0254aEBFCeA4fBaa";
   const contract = intializeContract(abiArray, contractAddress);
-  const adminAddress = "0xabE45d16e0390b9611098a2A58d25484D75d6F6E";
+  const adminAddress = "0xe3B3f5ace203d5659eEb0133dec972921ca9bB21";
   useEffect(() => {
     getNGO();
   }, []);

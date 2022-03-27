@@ -14,15 +14,27 @@ const CreateVolunteer = () => {
     setinputs({...inputs, [e.target.name]: e.target.value})
   }
 
+  //form create volunteer
   const createVolunteer = async (address, name) => {
-    const createNewVolunteer = await contract.methods.appointVolunteers(address, name).call({from : adminAddress});
+    const createNewVolunteer = await contract.methods.appointVolunteers(address, name).send({from : adminAddress});
     console.log(createNewVolunteer);
   }
 
-  const receiveSupples = async (indexOfSupply) => {
-    const getSupplies = await contract.methods.receiveSupples(indexOfSupply).call({from: adminAddress});
+  //button to recieve
+  const receiveSuppliesFromNgo = async (indexOfSupply) => {
+    const getSupplies = await contract.methods.receiveSupples(indexOfSupply).send({from: adminAddress});
     console.log(getSupplies);
   }
+
+  //
+  const getAllVolunteers = async (Supervisor_address) =>{
+    const getSize = await contract.methods.getSizeOffetchVolunteers(address).call();
+    for(let i = 0; i < getSize; i++){
+      let volunteer = await contract.methods.fetchVolunteers(Supervisor_address, i).call();
+      let volunteer_name = await contract.methods.getVolunteers(volunteer).call();
+      console.log(volunteer, volunteer_name);
+    }
+  } 
 
 
 
