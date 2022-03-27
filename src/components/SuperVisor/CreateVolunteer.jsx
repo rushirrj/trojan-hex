@@ -15,42 +15,6 @@ const CreateVolunteer = () => {
             haven't heard of them man bun deep.
           </p>
         </div>
-        <div className="flex justify-between mb-3 w-8/12 mx-auto">
-          <Link
-            class="mt-3 text-indigo-500 inline-flex items-center"
-            to="/supervisor"
-          >
-            Manage Volunteer
-            <svg
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              class="w-4 h-4 ml-2"
-              viewBox="0 0 24 24"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </Link>
-          <Link
-            class="mt-3 text-indigo-500 inline-flex items-center"
-            to="/supervisor/manage"
-          >
-            Manage Supplies
-            <svg
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              class="w-4 h-4 ml-2"
-              viewBox="0 0 24 24"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </Link>
-        </div>
         <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
           <div className="relative flex-grow w-full">
             <label for="full-name" className="leading-7 text-sm text-gray-600">

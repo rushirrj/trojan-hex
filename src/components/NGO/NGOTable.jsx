@@ -1,24 +1,14 @@
 import React from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 const NGOTable = () => {
   return (
-    <div className="md:mx-auto md:10/12 lg:w-8/12 mb-10 my-10">
-      <div className="flex flex-col text-center w-full mb-12">
-        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-          Manage Supplies for given Group/NGO.
-        </h1>
-        <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-          Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-          gentrify, subway tile poke farm-to-table. Franzen you probably haven't
-          heard of them man bun deep.
-        </p>
-      </div>
-      <div className="flex justify-between mb-3 w-full">
+    <div>
+      <div className="flex justify-between mb-5">
         <Link
           class="mt-3 text-indigo-500 inline-flex items-center"
-          to="/supervisor"
+          to="/ngo"
         >
-          Manage Volunteer
+          Manage NGO
           <svg
             fill="none"
             stroke="currentColor"
@@ -33,9 +23,9 @@ const NGOTable = () => {
         </Link>
         <Link
           class="mt-3 text-indigo-500 inline-flex items-center"
-          to="/supervisor/manage"
+          to="/ngo/manage"
         >
-          Manage Supplies
+          Manage Supply
           <svg
             fill="none"
             stroke="currentColor"
@@ -53,20 +43,21 @@ const NGOTable = () => {
         <thead>
           <tr>
             <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
-              Type
+              Event/Disaster
             </th>
             <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
               Address
             </th>
             <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-              Amount
+              Date
             </th>
-            <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
-              Accept
+            <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+              Place
             </th>
-            <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
-              Reject
+            <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+              View
             </th>
+            <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
           </tr>
         </thead>
         <tbody>
@@ -75,16 +66,10 @@ const NGOTable = () => {
             <td className="px-4 py-3">
               0xe3B3f5ace203d5659eEb0133dec972921ca9bB21
             </td>
-            <td className="px-4 py-3 text-lg text-gray-900">Free</td>
-            <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-              <button class="flex mx-auto mt-16 text-white bg-green-500 border-0 px-8 focus:outline-none hover:bg-green-800 rounded text-lg">
-                Accept
-              </button>
-            </td>
-            <td className="border-t-2 border-b-2 border-gray-200 w-10 text-center">
-              <button class="flex mx-auto mt-16 text-white bg-red-600 border-0 px-8 focus:outline-none hover:bg-red-800 rounded text-lg">
-                Reject
-              </button>
+            <td className="px-4 py-3">15/10/2010</td>
+            <td className="px-4 py-3 text-lg text-gray-900">Australia</td>
+            <td className="w-10 text-center">
+              <input name="plan" type="radio" />
             </td>
           </tr>
           <tr>
@@ -92,18 +77,12 @@ const NGOTable = () => {
             <td className="border-t-2 border-gray-200 px-4 py-3">
               0xe3B3f5ace203d5659eEb0133dec972921ca9bB21
             </td>
+            <td className="border-t-2 border-gray-200 px-4 py-3">25 GB</td>
             <td className="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
               $24
             </td>
-            <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-              <button class="flex mx-auto mt-16 text-white bg-green-500 border-0 px-8 focus:outline-none hover:bg-green-800 rounded text-lg">
-                Accept
-              </button>
-            </td>
-            <td className="border-t-2 border-b-2 border-gray-200 w-10 text-center">
-              <button class="flex mx-auto mt-16 text-white bg-red-600 border-0 px-8 focus:outline-none hover:bg-red-800 rounded text-lg">
-                Reject
-              </button>
+            <td className="border-t-2 border-gray-200 w-10 text-center">
+              <input name="plan" type="radio" />
             </td>
           </tr>
           <tr>
@@ -113,18 +92,12 @@ const NGOTable = () => {
             <td className="border-t-2 border-gray-200 px-4 py-3">
               0xe3B3f5ace203d5659eEb0133dec972921ca9bB21
             </td>
+            <td className="border-t-2 border-gray-200 px-4 py-3">40 GB</td>
             <td className="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
               $50
             </td>
-            <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-              <button class="flex mx-auto mt-16 text-white bg-green-500 border-0 px-8 focus:outline-none hover:bg-green-800 rounded text-lg">
-                Accept
-              </button>
-            </td>
-            <td className="border-t-2 border-b-2 border-gray-200 w-10 text-center">
-              <button class="flex mx-auto mt-16 text-white bg-red-600 border-0 px-8 focus:outline-none hover:bg-red-800 rounded text-lg">
-                Reject
-              </button>
+            <td className="border-t-2 border-gray-200 w-10 text-center">
+              <input name="plan" type="radio" />
             </td>
           </tr>
           <tr>
@@ -134,18 +107,14 @@ const NGOTable = () => {
             <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">
               0xe3B3f5ace203d5659eEb0133dec972921ca9bB21
             </td>
+            <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">
+              120 GB
+            </td>
             <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
               $72
             </td>
-            <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-              <button class="flex mx-auto mt-16 text-white bg-green-500 border-0 px-8 focus:outline-none hover:bg-green-800 rounded text-lg">
-                Accept
-              </button>
-            </td>
             <td className="border-t-2 border-b-2 border-gray-200 w-10 text-center">
-              <button class="flex mx-auto mt-16 text-white bg-red-600 border-0 px-8 focus:outline-none hover:bg-red-800 rounded text-lg">
-                Reject
-              </button>
+              <input name="plan" type="radio" />
             </td>
           </tr>
         </tbody>

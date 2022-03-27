@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const VTable = () => {
+const SupplyTable = () => {
   return (
-    <>
-      <div className="flex justify-between mb-3">
+    <div>
+      <div className="flex justify-between mb-5">
         <Link
           class="mt-3 text-indigo-500 inline-flex items-center"
-          to="/supervisor"
+          to="/ngo"
         >
-          Manage Volunteer
+          Manage NGO
           <svg
             fill="none"
             stroke="currentColor"
@@ -23,9 +23,9 @@ const VTable = () => {
         </Link>
         <Link
           class="mt-3 text-indigo-500 inline-flex items-center"
-          to="/supervisor/manage"
+          to="/ngo/manage"
         >
-          Manage Supplies
+          Manage Supply
           <svg
             fill="none"
             stroke="currentColor"
@@ -43,16 +43,19 @@ const VTable = () => {
         <thead>
           <tr>
             <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
-              Volunteer Name
+              Event/Disaster
             </th>
             <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
               Address
             </th>
             <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-              Rewards
+              Date
             </th>
             <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-              Community Hours
+              Place
+            </th>
+            <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+              View
             </th>
             <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
           </tr>
@@ -63,8 +66,8 @@ const VTable = () => {
             <td className="px-4 py-3">
               0xe3B3f5ace203d5659eEb0133dec972921ca9bB21
             </td>
-            <td className="px-4 py-3 text-lg text-gray-900">Free</td>
-            <td className="px-4 py-3 text-lg text-gray-900">6hrs</td>
+            <td className="px-4 py-3">15/10/2010</td>
+            <td className="px-4 py-3 text-lg text-gray-900">Australia</td>
             <td className="w-10 text-center">
               <input name="plan" type="radio" />
             </td>
@@ -74,11 +77,9 @@ const VTable = () => {
             <td className="border-t-2 border-gray-200 px-4 py-3">
               0xe3B3f5ace203d5659eEb0133dec972921ca9bB21
             </td>
+            <td className="border-t-2 border-gray-200 px-4 py-3">25 GB</td>
             <td className="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
               $24
-            </td>
-            <td className="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-              10hrs
             </td>
             <td className="border-t-2 border-gray-200 w-10 text-center">
               <input name="plan" type="radio" />
@@ -91,11 +92,9 @@ const VTable = () => {
             <td className="border-t-2 border-gray-200 px-4 py-3">
               0xe3B3f5ace203d5659eEb0133dec972921ca9bB21
             </td>
+            <td className="border-t-2 border-gray-200 px-4 py-3">40 GB</td>
             <td className="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
               $50
-            </td>
-            <td className="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-              5hrs
             </td>
             <td className="border-t-2 border-gray-200 w-10 text-center">
               <input name="plan" type="radio" />
@@ -108,11 +107,11 @@ const VTable = () => {
             <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">
               0xe3B3f5ace203d5659eEb0133dec972921ca9bB21
             </td>
-            <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-              $72
+            <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">
+              120 GB
             </td>
             <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-              7hrs
+              $72
             </td>
             <td className="border-t-2 border-b-2 border-gray-200 w-10 text-center">
               <input name="plan" type="radio" />
@@ -120,8 +119,8 @@ const VTable = () => {
           </tr>
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 
-export default VTable;
+export default SupplyTable;
