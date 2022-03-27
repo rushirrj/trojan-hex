@@ -8,6 +8,7 @@ import ManageVolunteer from "./pages/ManageVolunteer";
 import ManageSupplySupervisor from "./pages/ManageSupplySupervisor";
 import { Outlet } from "react-router-dom";
 import Managesupply from "./pages/ManageSupply";
+import RequestAdminView from "./pages/RequestAdminView";
 const RoutesM = () => {
   return (
     <Routes>
@@ -15,6 +16,7 @@ const RoutesM = () => {
       <Route path="/admin" element={<Outlet />}>
         <Route path="" element={<Event />} />
         <Route path="manage" element={<Admin />} />
+        <Route path=":id" element={<RequestAdminView />} />
       </Route>
       <Route path="/ngo" element={<Outlet />}>
         <Route path="" element={<ManageNGO />} />

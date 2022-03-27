@@ -1,13 +1,16 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import abiArray from "../../utils/abiArray.json";
 import { intializeContract } from "../../utils/connectWallet";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 const CreateNGO = () => {
   const contractAddress = "0x2c3bC0015567C7139F7A1BEC0254aEBFCeA4fBaa";
   const contract = intializeContract(abiArray, contractAddress);
   const adminAddress = "0xabE45d16e0390b9611098a2A58d25484D75d6F6E";
-
+  useEffect(() => {
+    getNGO();
+  }, []);
+  const navigate = useNavigate();
   const [inputs, setinputs] = useState({
     name: "",
     address: "",
@@ -105,18 +108,6 @@ const CreateNGO = () => {
             >
               Submit
             </button>
-            <button
-              className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-              onClick={getNGO}
-            >
-              get ngo
-            </button>
-            <button
-              className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-              onClick={getRequest}
-            >
-              get request
-            </button>
           </div>
         </div>
       </section>
@@ -166,6 +157,7 @@ const CreateNGO = () => {
               <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                 Address
               </th>
+              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"></th>
             </tr>
           </thead>
           <tbody>
@@ -174,6 +166,14 @@ const CreateNGO = () => {
                 <tr>
                   <td className="px-4 py-3">{n.ngoName}</td>
                   <td className="px-4 py-3">{n.ngo}</td>
+                  <td className="px-4 py-3">
+                    <Link
+                      className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                      to={`/admin/${n.ngo}?name=${n.ngoName}`}
+                    >
+                      View
+                    </Link>
+                  </td>
                 </tr>
               ))
             ) : (
