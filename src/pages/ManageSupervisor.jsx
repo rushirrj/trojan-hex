@@ -1,16 +1,16 @@
 import React from "react";
 import CreateVolunteer from "../components/SuperVisor/CreateVolunteer";
-import Table from "../components/SuperVisor/Table";
+import VTable from "../components/SuperVisor/VTable";
 
-const Supervisor = () => {
+const ManageSupervisor = () => {
   return (
     <div>
       <CreateVolunteer />
       <div className="md:mx-auto md:10/12 lg:w-8/12 mb-10">
-        <Table />
+        <VTable />
       </div>
     </div>
   );
 };
 
-export default Supervisor;
+export default ManageSupervisor;
