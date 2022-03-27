@@ -1,780 +1,218 @@
-[
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_admin",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_cause",
-				"type": "string"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "spender",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "value",
-				"type": "uint256"
-			}
-		],
-		"name": "Approval",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "value",
-				"type": "uint256"
-			}
-		],
-		"name": "Transfer",
-		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "NGO",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_volunteer",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amt",
-				"type": "uint256"
-			}
-		],
-		"name": "addHours",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "affiliatedToDisaster",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "typeOfAffiliation",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "contractAddress",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "spender",
-				"type": "address"
-			}
-		],
-		"name": "allowance",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_volunteer",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			}
-		],
-		"name": "appointVolunteers",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "appointedSupervisors",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "spender",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "approve",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "account",
-				"type": "address"
-			}
-		],
-		"name": "balanceOf",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_typeOfSupply",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "_supervisor",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			}
-		],
-		"name": "createSupplyRequest",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "decimals",
-		"outputs": [
-			{
-				"internalType": "uint8",
-				"name": "",
-				"type": "uint8"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "spender",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "subtractedValue",
-				"type": "uint256"
-			}
-		],
-		"name": "decreaseAllowance",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "fetchNGO",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "fetchSupervisor",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getAdmin",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getCause",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "getNGO",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getSizeOffetchNGO",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getSizeOffetchRequests",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_NGO",
-				"type": "address"
-			}
-		],
-		"name": "getSizeOffetchSupervisors",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "getSupervisor",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "getVolunteer",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "getVolunteers",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_NGO",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			}
-		],
-		"name": "giveAccessToNGO",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_supervisor",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			}
-		],
-		"name": "giveAccessToSupervisor",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "spender",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "addedValue",
-				"type": "uint256"
-			}
-		],
-		"name": "increaseAllowance",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "name",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "index",
-				"type": "uint256"
-			}
-		],
-		"name": "receiveSupples",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_supervisor",
-				"type": "address"
-			}
-		],
-		"name": "redeemHours",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "requests",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "supplyType",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "supervisor",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "requestState",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "index",
-				"type": "uint256"
-			}
-		],
-		"name": "sendSupplies",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "supervisors",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "symbol",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "totalSupply",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "recipient",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "transfer",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "sender",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "recipient",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "transferFrom",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "volunteerWorkHours",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "volunteers",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	}
-]
+//SPDX-License-Identifier: GPL-3.0
+ 
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.4.0/contracts/token/ERC20/ERC20.sol";
+ 
+pragma solidity >= 0.5.0 < 0.9.0;
+ 
+ 
+ 
+ 
+contract DisasterCreator{
+    Disaster[] public disasters;
+ 
+    function createDisaster(string memory cause) public {
+        Disaster newDisaster = new Disaster(msg.sender, cause);
+        disasters.push(newDisaster); 
+    }
+ 
+}     
+ 
+contract Disaster is ERC20{
+ 
+    address private admin; 
+    string private cause;
+    using SafeMath for uint256;
+ 
+    struct Request {
+        string supplyType;
+        address supervisor;
+        uint amount;
+        uint requestState; 
+    }
+
+    struct affiliatedTo {
+        string typeOfAffiliation;
+        address contractAddress;
+    }
+    //Array of NGOs
+    mapping(address => address[]) public fetchNGO;
+    //Array of supervisors
+    mapping(address => address[]) public fetchSupervisor;
+    //address affiliated to disaster
+    mapping(address => affiliatedTo) public affiliatedToDisaster; 
+    
+    //token balances mapping
+    mapping(address => uint256) balances;
+ 
+    //NGO mapping to verify authenticated NGOs
+    mapping(address => bool) public NGO;
+ 
+    //Struct array Mapping for storing supply request
+    mapping(address => Request[]) public requests;
+ 
+    //apointing Supervisors
+    mapping(address => bool) public appointedSupervisors;
+ 
+    //mapping Supervisors to particular NGOs
+    mapping(address => address) public supervisors; 
+ 
+    //getting name of supervisor from address 
+    mapping(address => string) public getSupervisor;
+ 
+    //getting name of NGO from address
+    mapping(address => string) public getNGO;
+ 
+    //getting name of volunteer from address
+    mapping(address => string) public getVolunteer;
+ 
+    //mapping volunteers
+    mapping(address => bool) public volunteers;
+ 
+    //getting name of volunteer from address
+    mapping(address => string) public getVolunteers;
+ 
+    //nested mapping to allot work hours for volunteers
+    mapping(address => mapping(address => uint)) public volunteerWorkHours;
+ 
+ 
+ 
+    //only allows admin to call certain functions
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "Sorry, You don't have admin access");
+        _;
+    }
+ 
+    //only allows NGO to call certain functions
+    modifier onlyNGO() {
+        require(NGO[msg.sender] == true, "Sorry, Your NGO does'nt have access to create supply request");
+        _;
+    }
+ 
+    //only allows supervisors to call certain functions
+    modifier onlySupervisor{
+        require(appointedSupervisors[msg.sender], "Sorry you are not an appointed Supervisor");
+        _;
+    }
+ 
+    //initialises the Disaster contract and minting ERC20 Help tokens
+    constructor(address _admin, string memory _cause) ERC20("VOLUNTEERS", "HELP")  {
+        _mint(msg.sender, 1e18*10000);
+        balances[address(this)] = 1e18*10000;
+        admin = _admin;
+        cause = _cause;
+ 
+    }
+ 
+    //getter function for checking Admin address
+    function getAdmin() external view returns(address){
+        return admin;
+    }    
+ 
+    //Getter function to check the disaster cause
+    function getCause() external view returns(string memory){
+        return cause;
+    }
+ 
+    //Giving access to NGO, can be only called by Admin
+    function giveAccessToNGO(address _NGO, string memory _name) public onlyAdmin {
+        NGO[_NGO] = true;
+        getNGO[_NGO] = _name;
+        affiliatedTo storage newAffiliation;
+        newAffiliation.typeOfAffiliation = "NGO";
+        newAffiliation.contractAddress = address(this);
+        affiliatedToDisaster[_NGO] = newAffiliation;
+        fetchNGO[admin].push(_NGO);
+    }
+
+    //getsSizeoffetchNGO
+    function getSizeOffetchNGO() external view returns(uint){
+        return fetchNGO[admin].length;
+    }
+
+    //getsSizeOffetchRequests
+    function getSizeOffetchRequests() external view returns(uint){
+        return fetchNGO[admin].length;
+    }
+
+    //getSizeOffetchRequests
+    function getSizeOffetchSupervisors(address _NGO) external view returns(uint){
+        return fetchNGO[_NGO].length;
+    }
+ 
+    //Giving accress to supervisor
+    function giveAccessToSupervisor(address _supervisor, string memory _name) external onlyNGO {
+        appointedSupervisors[_supervisor] = true;
+        supervisors[_supervisor] = msg.sender;
+        getSupervisor[_supervisor] = _name;
+        affiliatedTo storage newAffiliation;
+        newAffiliation.typeOfAffiliation = "SUPERVISOR";
+        newAffiliation.contractAddress = address(this);
+        affiliatedToDisaster[_supervisor] = newAffiliation;
+        fetchNGO[msg.sender].push(_supervisor);
+    }
+ 
+ 
+ 
+    //Creating a new Supply request by NGO, the state 0 defines it's created 1 defines it's in transit(goods dispatched) and 2 defines succesfully completed
+    function createSupplyRequest(string memory _typeOfSupply, address _supervisor, uint _amount) public onlyNGO {
+        Request storage newRequest;  
+        newRequest.supplyType = _typeOfSupply;
+        newRequest.supervisor = _supervisor;
+        newRequest.amount = _amount;
+        newRequest.requestState = 0;
+        requests[msg.sender].push(newRequest);
+    }
+ 
+    //send supplies from NGO warehouse
+    function sendSupplies(uint index) external onlyNGO{
+        require(requests[msg.sender][index].requestState == 0, "Supplies were sent already");
+        requests[msg.sender][index].requestState = 1;
+    }
+ 
+    //Supervisor will recieve supplies from NGO
+    function receiveSupples(uint index) external onlySupervisor{
+        require(requests[msg.sender][index].requestState == 1, "Sorry supplies were'nt sent or they have already reached the destination");
+        requests[msg.sender][index].requestState = 2;
+    }
+ 
+    //Supervisor will appoint volunteers
+    function appointVolunteers(address _volunteer, string memory _name) external onlySupervisor{
+        require(!volunteers[_volunteer], "Volunteer already appointed");
+        volunteers[_volunteer] = true;
+        getVolunteers[_volunteer] = _name;
+        affiliatedTo storage newAffiliation;
+        newAffiliation.typeOfAffiliation = "VOLUNTEER";
+        newAffiliation.contractAddress = address(this);
+        affiliatedToDisaster[_volunteer] = newAffiliation;
+    }
+ 
+    //add community hours to volunteers
+    function addHours(address _volunteer, uint amt) external onlySupervisor{
+        volunteerWorkHours[msg.sender][_volunteer] += amt;
+    }
+ 
+    //redeem tokens by volunteer
+    function redeemHours(address _supervisor) external{
+        require(volunteerWorkHours[_supervisor][msg.sender] > 0, "Sorry you have no hours left");
+        uint amount = volunteerWorkHours[_supervisor][msg.sender];
+        volunteerWorkHours[_supervisor][msg.sender] = 0;
+        balances[address(this)] = balances[address(this)].sub(amount*1000000000000000000);
+        balances[msg.sender] = balances[msg.sender].add(amount*1000000000000000000);
+        emit Transfer(address(this), msg.sender, amount*1000000000000000000);
+    }
+    
+ 
+ 
+}
+library SafeMath {
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+    //   assert(b <= a);
+      return a - b;
+    }
+ 
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+      uint256 c = a + b;
+    //   assert(c >= a);
+      return c;
+    }
+}

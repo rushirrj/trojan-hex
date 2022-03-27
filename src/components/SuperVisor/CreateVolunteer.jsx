@@ -1,7 +1,31 @@
 import React from "react";
-
+import { useState } from "react";
 import { Link } from "react-router-dom";
 const CreateVolunteer = () => {
+  const [inputs, setinputs] = useState({
+    name: "", 
+    address: ""
+  });
+  const contractAddress = '0x2c3bC0015567C7139F7A1BEC0254aEBFCeA4fBaa';
+  const contract = intializeContract(abiArray, contractAddress);
+  const adminAddress = '0xabE45d16e0390b9611098a2A58d25484D75d6F6E';
+
+  const onChange = (e) =>{
+    setinputs({...inputs, [e.target.name]: e.target.value})
+  }
+
+  const createVolunteer = async (address, name) => {
+    const createNewVolunteer = await contract.methods.appointVolunteers(address, name).call({from : adminAddress});
+    console.log(createNewVolunteer);
+  }
+
+  const receiveSupples = async (indexOfSupply) => {
+    const getSupplies = await contract.methods.receiveSupples(indexOfSupply).call({from: adminAddress});
+    console.log(getSupplies);
+  }
+
+
+
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">
