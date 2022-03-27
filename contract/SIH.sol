@@ -4,6 +4,9 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.4.0/contr
  
 pragma solidity >= 0.5.0 < 0.9.0;
  
+ 
+ 
+ 
 contract DisasterCreator{
     Disaster[] public disasters;
  
@@ -31,7 +34,8 @@ contract Disaster is ERC20{
         string typeOfAffiliation;
         address contractAddress;
     }
-    
+    //Array of NGOs
+    mapping(address => address[]) public fetchNGO;
     //address affiliated to disaster
     mapping(address => affiliatedTo) public affiliatedToDisaster; 
     
@@ -115,6 +119,17 @@ contract Disaster is ERC20{
         newAffiliation.typeOfAffiliation = "NGO";
         newAffiliation.contractAddress = address(this);
         affiliatedToDisaster[_NGO] = newAffiliation;
+        fetchNGO[admin].push(_NGO);
+    }
+
+    //getsSizeoffetchNGO
+    function getSizeOffetchNGO() external view returns(uint){
+        return fetchNGO[admin].length;
+    }
+
+    //getsSizeOffetchRequests
+    function getSizeOffetchRequests() external view returns(uint){
+        return fetchNGO[admin].length;
     }
  
     //Giving accress to supervisor
@@ -144,7 +159,7 @@ contract Disaster is ERC20{
     function sendSupplies(uint index) external onlyNGO{
         require(requests[msg.sender][index].requestState == 0, "Supplies were sent already");
         requests[msg.sender][index].requestState = 1;
-    } 
+    }
  
     //Supervisor will recieve supplies from NGO
     function receiveSupples(uint index) external onlySupervisor{

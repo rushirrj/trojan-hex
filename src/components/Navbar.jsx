@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connectWallet } from "../utils/connectWallet";
+import { connectWallet, disconnectWallet } from "../utils/connectWallet";
+import { useState } from "react";
 const Navbar = () => {
+  const [data, setdata] = useState({
+    address: ""
+  });
+  
   return (
     <header class="text-gray-400 bg-gray-900 body-font">
       <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -36,11 +41,12 @@ const Navbar = () => {
         </nav>
         <button
           onClick={() => {
-            connectWallet();
+            (!data.address ?  connectWallet(setdata) : disconnectWallet(setdata))
+           
           }}
           class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
         >
-          Connect to &nbsp;
+          {(data.address ? data.address.slice(0,10) : <p>Connect to &nbsp;</p>)}
           <svg
             class="h-4"
             viewBox="0 0 40 38"
