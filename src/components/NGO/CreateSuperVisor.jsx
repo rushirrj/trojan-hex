@@ -1,6 +1,57 @@
 import React from "react";
-
+import abiArray from '../../utils/abiArray.json';
+import { intializeContract } from "../../utils/connectWallet";
+import { useState } from "react";
 const CreateSuperVisor = () => {
+    const [inputs, setinputs] = useState({
+      name: "",
+      address: ""
+    });
+
+    const contractAddress = '0x2c3bC0015567C7139F7A1BEC0254aEBFCeA4fBaa';
+    const contract = intializeContract(abiArray, contractAddress);
+    const adminAddress = '0xabE45d16e0390b9611098a2A58d25484D75d6F6E';
+
+    const onChange = (e) =>{
+      setinputs({...inputs, [e.target.name]: e.target.value})
+    }
+
+    const createSupervisor = async(address, name) =>{
+      const newSupervisor = await contract.methods.giveAccessToSupervisor(address, name).send({from: adminAddress});
+      console.log(newSupervisor); 
+      setinputs({
+        name: "",
+        address: ""
+      })
+    }
+    
+    const getSupervisor = async (NGO_address) => {
+      
+      const getSize = await contract.methods.getSizeOffetchSupervisors().call();
+
+      console.log(getSize);
+       //get all NGOs Via loop
+      
+      for(let i = 0; i < getSize; i++){
+        let supervisor = await contract.methods.fetchSupervisor(NGO_address, i).call();
+        let supervisor_name = await contract.methods.getSupervisor(supervisor).call();
+        
+        console.log(supervisor, supervisor_name);
+      }
+      
+    }
+
+    const createRequest = async (typeOfSupply, supervisor, amount) => {
+        const newRequest = await contract.methods.createSupplyRequest(typeOfSupply, supervisor, amount).send({from: adminAddress});
+        console.log(newRequest);
+    }
+
+    const sendSupplies = async (index) =>{
+        const initiateSupply = await contract.methods.sendSupplies(index).call({from: adminAddress});
+    }
+    
+
+  
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">
