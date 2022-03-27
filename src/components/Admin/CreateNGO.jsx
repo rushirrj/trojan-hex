@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import abiArray from "../../utils/abiArray.json";
-import { intializeContract } from "../../utils/connectWallet";
+import { intializeContract, getAccountID } from "../../utils/connectWallet";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 const CreateNGO = () => {
   const contractAddress = "0x2c3bC0015567C7139F7A1BEC0254aEBFCeA4fBaa";
@@ -34,6 +34,14 @@ const CreateNGO = () => {
     });
   };
 
+  // getAccountID()
+  //   .then((id) => {
+  //     console.log(id);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+
   const getNGO = async () => {
     const getSize = await contract.methods.getSizeOffetchNGO().call();
     let ngos = [];
@@ -43,19 +51,6 @@ const CreateNGO = () => {
       ngos.push({ ngo: NGO, ngoName: NGO_Name });
     }
     setNgo(ngos);
-  };
-
-  //address => array of request(struct)
-  const getRequest = async () => {
-    let requestarr = [];
-    const getSize = await contract.methods.getSizeOffetchRequests().call();
-    console.log(getSize);
-    for (let i = 0; i < getSize; i++) {
-      let request = await contract.methods.requests(adminAddress, i).call();
-      console.log(request);
-      requestarr.push(request);
-    }
-    setRequests(requestarr);
   };
 
   return (
