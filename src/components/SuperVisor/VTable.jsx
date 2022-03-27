@@ -1,6 +1,6 @@
 import React from "react";
 
-const Table = () => {
+const VTable = () => {
   return (
     <table className="table-auto w-full text-left whitespace-no-wrap">
       <thead>
@@ -86,4 +86,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default VTable;

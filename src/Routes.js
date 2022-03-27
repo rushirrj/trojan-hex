@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import NGO from "./pages/NGO";
+import ManageNGO from "./pages/ManageNGO";
 import Admin from "./pages/Admin";
 import ManageVolunteer from "./pages/ManageVolunteer";
 import ManageSupplySupervisor from "./pages/ManageSupplySupervisor";
@@ -12,7 +12,7 @@ const RoutesM = () => {
       <Route path="/" element={<Home />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/ngo" element={<Outlet />}>
-        <Route path="" element={<NGO />} />
+        <Route path="" element={<ManageNGO />} />
       </Route>
       <Route path="/supervisor" element={<Outlet />}>
         <Route path="" element={<ManageVolunteer />} />
