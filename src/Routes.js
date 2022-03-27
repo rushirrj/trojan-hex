@@ -10,8 +10,10 @@ const RoutesM = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/ngo" element={<NGO />} />
       <Route path="/admin" element={<Admin />} />
+      <Route path="/ngo" element={<Outlet />}>
+        <Route path="" element={<NGO />} />
+      </Route>
       <Route path="/supervisor" element={<Outlet />}>
         <Route path="" element={<ManageSupervisor />} />
         <Route path="manage" element={<ManageSupplySupervisor />} />
