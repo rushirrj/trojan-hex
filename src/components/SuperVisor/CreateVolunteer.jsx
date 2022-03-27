@@ -1,14 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { getAccountID, intializeContract } from "../../utils/connectWallet";
 const CreateVolunteer = () => {
   const [inputs, setinputs] = useState({
     name: "", 
     address: ""
   });
-  const contractAddress = '0x2c3bC0015567C7139F7A1BEC0254aEBFCeA4fBaa';
+  const contractAddress = '0x21cb42De23aFac678CeD8482E04D4B3699288767';
   const contract = intializeContract(abiArray, contractAddress);
-  const adminAddress = '0xabE45d16e0390b9611098a2A58d25484D75d6F6E';
+  const adminAddress = getAccountID();
 
   const onChange = (e) =>{
     setinputs({...inputs, [e.target.name]: e.target.value})
