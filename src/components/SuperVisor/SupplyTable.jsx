@@ -6,7 +6,7 @@ import abiArray from "../../utils/abiArray.json";
 const Supplytable = () => {
   const [adminAddress, setAdminAddress] = useState(localStorage.account);
   const [requests, setRequests] = useState([]);
-  const contractAddress = "0xCD389CB27875Be5E6260D67208B061f583dC5C64";
+  const contractAddress = "0xac60dB062094064A67d4488eB3014de45115a105";
   const contract = intializeContract(abiArray, contractAddress);
   useEffect(() => {
     getRequest(adminAddress);
