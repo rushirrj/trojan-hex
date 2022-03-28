@@ -38,6 +38,9 @@ const Navbar = () => {
           <Link to="/supervisor">
             <a class="mr-5 hover:text-white">Supervisor</a>
           </Link>
+          <Link to="/volunteer">
+            <a class="mr-5 hover:text-white">Volunteer</a>
+          </Link>
         </nav>
         <button
           onClick={() => {

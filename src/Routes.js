@@ -9,6 +9,7 @@ import ManageSupplySupervisor from "./pages/ManageSupplySupervisor";
 import { Outlet } from "react-router-dom";
 import Managesupply from "./pages/ManageSupply";
 import RequestAdminView from "./pages/RequestAdminView";
+import Volunteer from "./pages/Volunteer";
 const RoutesM = () => {
   return (
     <Routes>
@@ -26,6 +27,7 @@ const RoutesM = () => {
         <Route path="" element={<ManageVolunteer />} />
         <Route path="manage" element={<ManageSupplySupervisor />} />
       </Route>
+        <Route path="volunteer" element={<Volunteer />} />
     </Routes>
   );
 };
