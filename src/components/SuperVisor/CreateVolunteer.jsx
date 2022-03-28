@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import abiArray from "../../utils/abiArray.json";
 import { getAccountID, intializeContract } from "../../utils/connectWallet";
 import { Link } from "react-router-dom";
+import AddHours from "./AddHours";
 const CreateVolunteer = () => {
   const [inputs, setinputs] = useState({
     name: "",
@@ -14,8 +15,9 @@ const CreateVolunteer = () => {
   const [adminAddress, setAdminAddress] = useState(localStorage.account);
   const [volunters, setVolunters] = useState([]);
   const [requests, setRequests] = useState([]);
-  const contractAddress = "0xac60dB062094064A67d4488eB3014de45115a105";
+  const contractAddress = "0xc226b7A0bf726De824Ef44aac09C29Cd1F6172C7";
   const contract = intializeContract(abiArray, contractAddress);
+  
   console.log(adminAddress);
 
   const onChange = (e) => {
@@ -57,7 +59,7 @@ const CreateVolunteer = () => {
       let volunteer = await contract.methods
         .fetchVolunteers(Supervisor_address, i)
         .call();
-      console.log(volunteer);
+      console.log(volunteer+"id");
       let volunteer_name = await contract.methods
         .getVolunteers(volunteer)
         .call();
@@ -170,6 +172,7 @@ const CreateVolunteer = () => {
             </svg>
           </Link>
         </div>
+        <AddHours/>
         <table className="table-auto w-full text-left whitespace-no-wrap">
           <thead>
             <tr>

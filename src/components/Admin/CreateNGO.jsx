@@ -4,7 +4,7 @@ import abiArray from "../../utils/abiArray.json";
 import { intializeContract, getAccountID } from "../../utils/connectWallet";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 const CreateNGO = () => {
-  const contractAddress = "0xac60dB062094064A67d4488eB3014de45115a105";
+  const contractAddress = "0xc226b7A0bf726De824Ef44aac09C29Cd1F6172C7";
   const contract = intializeContract(abiArray, contractAddress);
   const adminAddress = localStorage.account;
   useEffect(() => {

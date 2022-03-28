@@ -1,6 +1,58 @@
 import React from "react";
+import abiArray from "../../utils/abiArray.json";
+import { intializeContract, getAccountID } from "../../utils/connectWallet";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 const CreateSupply = () => {
+  const contractAddress = "0x2138770145401C76c2B50CE775AE4c2546F107a2";
+  const contract = intializeContract(abiArray, contractAddress);
+  const adminAddress = localStorage.account;
+  const [inputs, setinputs] = useState({
+    typeOfSupply: "",
+    supervisor: "",
+    quantity: "",
+  });
+  const [requests, setRequests] = useState([]);
+  const onChange = (e) => {
+    setinputs({ ...inputs, [e.target.name]: e.target.value });
+  };
+  const createRequest = async (typeOfSupply, supervisor, amount) => {
+    const newRequest = await contract.methods
+      .createSupplyRequest(typeOfSupply, supervisor, amount)
+      .send({ from: adminAddress });
+    console.log(newRequest);
+    location.reload();
+  };
+
+  const sendSupplies = async (index) => {
+    const initiateSupply = await contract.methods
+      .sendSupplies(index)
+      .call({ from: adminAddress });
+  };
+  const getRequest = async () => {
+    let requestarr = [];
+    //update address
+    const getSize = await contract.methods
+      .getSizeOffetchRequests(adminAddress)
+      .call();
+    console.log(getSize);
+    for (let i = 0; i < getSize; i++) {
+      console.log(getSize, "CAME TILL HERE");
+      let request = await contract.methods.requests(adminAddress, i).call();
+      console.log(request);
+      if (request.requestState === "0") {
+        requestarr.push({ ...request, state: "Created" });
+      } else if (request.requestState === "1") {
+        requestarr.push({ ...request, state: "Dispatched" });
+      } else if (request.requestState === "2") {
+        requestarr.push({ ...request, state: "Successful" });
+      }
+    }
+    setRequests(requestarr);
+  };
+  useEffect(() => {
+    getRequest();
+  }, []);
   return (
     <>
       <section className="text-gray-600 body-font">
@@ -21,27 +73,56 @@ const CreateSupply = () => {
                 for="full-name"
                 className="leading-7 text-sm text-gray-600"
               >
-                Address
+                Type Of Supply
               </label>
               <input
                 type="text"
-                id="address"
-                name="address"
+                id="typeOfSupply"
+                name="typeOfSupply"
+                value={inputs.typeOfSupply}
+                onChange={(e) => onChange(e)}
+                className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div className="relative flex-grow w-full">
+              <label
+                for="full-name"
+                className="leading-7 text-sm text-gray-600"
+              >
+                Supervisor
+              </label>
+              <input
+                type="text"
+                id="supervisor"
+                name="supervisor"
+                value={inputs.supervisor}
+                onChange={(e) => onChange(e)}
                 className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
             <div className="relative flex-grow w-full">
               <label for="email" className="leading-7 text-sm text-gray-600">
-                Name
+                Quantity
               </label>
               <input
                 type="text"
-                id="name"
-                name="name"
+                id="quantity"
+                name="quantity"
+                value={inputs.quantity}
+                onChange={(e) => onChange(e)}
                 className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
-            <button className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            <button
+              onClick={() => {
+                createRequest(
+                  inputs.typeOfSupply,
+                  inputs.supervisor,
+                  inputs.quantity
+                );
+              }}
+              className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            >
               Submit
             </button>
           </div>
@@ -85,35 +166,34 @@ const CreateSupply = () => {
           <thead>
             <tr>
               <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
-                Event/Disaster
+                Supervisor
               </th>
               <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                Address
+                Type
               </th>
               <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                Date
+                Quantity/Amount
               </th>
               <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                Place
+                Request State
               </th>
-              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                View
-              </th>
-              <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="px-4 py-3">Ajit NGO</td>
-              <td className="px-4 py-3">
-                0xe3B3f5ace203d5659eEb0133dec972921ca9bB21
-              </td>
-              <td className="px-4 py-3">15/10/2010</td>
-              <td className="px-4 py-3 text-lg text-gray-900">Australia</td>
-              <td className="w-10 text-center">
-                <input name="plan" type="radio" />
-              </td>
-            </tr>
+            {requests.length > 0 ? (
+              requests.map((r, i) => (
+                <tr key={i}>
+                  <td className="px-4 py-3">{r.supervisor}</td>
+                  <td className="px-4 py-3">{r.supplyType}</td>
+                  <td className="px-4 py-3">{r.amount}</td>
+                  <td className="px-4 py-3">{r?.state}</td>
+                </tr>
+              ))
+            ) : (
+              <p className="flex items-center justify-center text-lg text-black">
+                No Data Found
+              </p>
+            )}
           </tbody>
         </table>
       </div>

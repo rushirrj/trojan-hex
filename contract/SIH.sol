@@ -173,7 +173,7 @@ contract Disaster is ERC20{
 
     //getSizeOffetchRequests
     function getSizeOffetchSupervisors(address _NGO) external view returns(uint){
-        return fetchNGO[_NGO].length;
+        return fetchSupervisor[_NGO].length;
     }
     
     function getSizeOffetchVolunteers(address _supervisor) external view returns(uint){
@@ -189,7 +189,7 @@ contract Disaster is ERC20{
         newAffiliation.typeOfAffiliation = "SUPERVISOR";
         newAffiliation.contractAddress = address(this);
         affiliatedToDisaster[_supervisor] = newAffiliation;
-        fetchNGO[msg.sender].push(_supervisor);
+        fetchSupervisor[msg.sender].push(_supervisor);
     }
  
  
@@ -236,11 +236,11 @@ contract Disaster is ERC20{
     //redeem tokens by volunteer
     function redeemHours(address _supervisor) external{
         require(volunteerWorkHours[_supervisor][msg.sender] > 0, "Sorry you have no hours left");
-        uint amount = volunteerWorkHours[_supervisor][msg.sender];
+        uint aAmt = volunteerWorkHours[_supervisor][msg.sender];
         volunteerWorkHours[_supervisor][msg.sender] = 0;
-        balances[admin] = balances[admin].sub(amount*1000000000000000000);
-        balances[admin] = balances[msg.sender].add(amount*1000000000000000000);
-        emit Transfer(admin, msg.sender, amount*1000000000000000000);
+        balances[address(this)] = balances[address(this)].sub(aAmt*1000000000000000000);
+        balances[msg.sender] = balances[msg.sender].add(aAmt*1000000000000000000);
+        emit Transfer(address(this), msg.sender, aAmt*1000000000000000000);
     }
     
  
