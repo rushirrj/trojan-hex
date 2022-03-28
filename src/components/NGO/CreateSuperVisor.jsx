@@ -19,10 +19,11 @@ const CreateSuperVisor = () => {
   };
 
   const createSupervisor = async (address, name) => {
-    const newSupervisor = await contract.methods
+    await contract.methods
       .giveAccessToSupervisor(address, name)
       .send({ from: adminAddress })
       .then((res) => {
+        console.log(res)
         if (res.status) {
           setSupervisor([
             ...supervisorM,
@@ -38,7 +39,6 @@ const CreateSuperVisor = () => {
       .catch((err) => {
         console.log(err);
       });
-    console.log(newSupervisor);
     setinputs({
       name: "",
       address: "",
