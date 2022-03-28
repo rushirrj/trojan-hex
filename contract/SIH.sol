@@ -211,9 +211,9 @@ contract Disaster is ERC20{
     }
  
     //Supervisor will recieve supplies from NGO
-    function receiveSupples(uint index) external onlySupervisor{
-        require(requests[msg.sender][index].requestState == 1, "Sorry supplies were'nt sent or they have already reached the destination");
-        requests[msg.sender][index].requestState = 2;
+    function receiveSupples(address _NGO, uint index) external onlySupervisor{
+        require(requests[_NGO][index].requestState == 1, "Sorry supplies were'nt sent or they have already reached the destination");
+        requests[_NGO][index].requestState = 2;
     }
  
     //Supervisor will appoint volunteers

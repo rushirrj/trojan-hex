@@ -203,10 +203,16 @@
     },
     {
         "inputs": [{
-            "internalType": "uint256",
-            "name": "index",
-            "type": "uint256"
-        }],
+                "internalType": "address",
+                "name": "_NGO",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "index",
+                "type": "uint256"
+            }
+        ],
         "name": "receiveSupples",
         "outputs": [],
         "stateMutability": "nonpayable",
