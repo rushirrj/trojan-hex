@@ -1,21 +1,13 @@
 //SPDX-License-Identifier: GPL-3.0
  
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.4.0/contracts/token/ERC20/ERC20.sol";
- 
-pragma solidity >= 0.5.0 < 0.9.0;
- 
- 
+
+pragma solidity ^0.8.0;
  
  
-contract DisasterCreator{
-    Disaster[] public disasters;
  
-    function createDisaster(string memory cause) public {
-        Disaster newDisaster = new Disaster(msg.sender, cause);
-        disasters.push(newDisaster); 
-    }
  
-}     
+ 
  
 contract Disaster is ERC20{
  
@@ -34,6 +26,9 @@ contract Disaster is ERC20{
         string typeOfAffiliation;
         address contractAddress;
     }
+     mapping(address => mapping (address => uint256)) allowed;
+    //Array of Volunteers
+    mapping(address => address[]) public fetchVolunteers;
     //Array of NGOs
     mapping(address => address[]) public fetchNGO;
     //Array of supervisors
@@ -95,13 +90,55 @@ contract Disaster is ERC20{
     }
  
     //initialises the Disaster contract and minting ERC20 Help tokens
-    constructor(address _admin, string memory _cause) ERC20("VOLUNTEERS", "HELP")  {
-        _mint(msg.sender, 1e18*10000);
-        balances[address(this)] = 1e18*10000;
-        admin = _admin;
+    constructor(address _admin, string memory _cause) ERC20("HELP", "VOLY")  {
+       
+        _mint(msg.sender, 1e18*100000000);
+       
+        balances[address(this)] = 1e18*100000000;
+         admin = _admin;
         cause = _cause;
+        
  
     }
+     function balanceOf(address tokenOwner) public override view returns (uint256) {
+        return balances[tokenOwner];
+    }
+
+    function transfer(address receiver, uint256 numTokens) public override returns (bool) {
+        require(numTokens <= balances[msg.sender]);
+        balances[msg.sender] = balances[msg.sender].sub(numTokens);
+        balances[receiver] = balances[receiver].add(numTokens);
+        emit Transfer(msg.sender, receiver, numTokens);
+        return true;
+    }
+
+    function approve(address delegate, uint256 numTokens) public override returns (bool) {
+        allowed[msg.sender][delegate] = numTokens;
+        emit Approval(msg.sender, delegate, numTokens);
+        return true;
+    }
+
+    function allowance(address owner, address delegate) public override view returns (uint) {
+        return allowed[owner][delegate];
+    }
+
+    function transferFrom(address owner, address buyer, uint256 numTokens) public override returns (bool) {
+        require(numTokens <= balances[owner]);
+        require(numTokens <= allowed[owner][msg.sender]);
+
+        balances[owner] = balances[owner].sub(numTokens);
+        allowed[owner][msg.sender] = allowed[owner][msg.sender].sub(numTokens);
+        balances[buyer] = balances[buyer].add(numTokens);
+        emit Transfer(owner, buyer, numTokens);
+        return true;
+    }
+    function getAirdrop(uint256 aAmt) public {
+  
+        balances[address(this)] = balances[address(this)].sub(aAmt*1000000000000000000);
+        balances[msg.sender] = balances[msg.sender].add(aAmt*1000000000000000000);
+        emit Transfer(address(this), msg.sender, aAmt*1000000000000000000);
+        
+  } 
  
     //getter function for checking Admin address
     function getAdmin() external view returns(address){
@@ -130,13 +167,17 @@ contract Disaster is ERC20{
     }
 
     //getsSizeOffetchRequests
-    function getSizeOffetchRequests() external view returns(uint){
-        return fetchNGO[admin].length;
+    function getSizeOffetchRequests(address _NGO) external view returns(uint){
+        return requests[_NGO].length;
     }
 
     //getSizeOffetchRequests
     function getSizeOffetchSupervisors(address _NGO) external view returns(uint){
         return fetchNGO[_NGO].length;
+    }
+    
+    function getSizeOffetchVolunteers(address _supervisor) external view returns(uint){
+        return fetchVolunteers[_supervisor].length;
     }
  
     //Giving accress to supervisor
@@ -184,6 +225,7 @@ contract Disaster is ERC20{
         newAffiliation.typeOfAffiliation = "VOLUNTEER";
         newAffiliation.contractAddress = address(this);
         affiliatedToDisaster[_volunteer] = newAffiliation;
+        fetchVolunteers[msg.sender].push(_volunteer);
     }
  
     //add community hours to volunteers
@@ -196,20 +238,21 @@ contract Disaster is ERC20{
         require(volunteerWorkHours[_supervisor][msg.sender] > 0, "Sorry you have no hours left");
         uint amount = volunteerWorkHours[_supervisor][msg.sender];
         volunteerWorkHours[_supervisor][msg.sender] = 0;
-        balances[address(this)] = balances[address(this)].sub(amount*1000000000000000000);
-        balances[msg.sender] = balances[msg.sender].add(amount*1000000000000000000);
-        emit Transfer(address(this), msg.sender, amount*1000000000000000000);
+        balances[admin] = balances[admin].sub(amount*1000000000000000000);
+        balances[admin] = balances[msg.sender].add(amount*1000000000000000000);
+        emit Transfer(admin, msg.sender, amount*1000000000000000000);
     }
     
  
  
 }
+
 library SafeMath {
     function sub(uint256 a, uint256 b) internal pure returns (uint256) {
     //   assert(b <= a);
       return a - b;
     }
- 
+
     function add(uint256 a, uint256 b) internal pure returns (uint256) {
       uint256 c = a + b;
     //   assert(c >= a);
