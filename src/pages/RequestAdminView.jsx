@@ -9,7 +9,7 @@ const Requestadminview = ({ ngo }) => {
   const name = searchParams.get("name");
   const [ngoName, setNgoName] = useState("");
   const navigate = useNavigate();
-  const contractAddress = "0x2c3bC0015567C7139F7A1BEC0254aEBFCeA4fBaa";
+  const contractAddress = "0xEC027ba0434eE04c16425Fb018c72B4e30512B67";
   const contract = intializeContract(abiArray, contractAddress);
   const NGO_Name = async () => {
     return await contract.methods.getNGO(id).call();
@@ -20,12 +20,13 @@ const Requestadminview = ({ ngo }) => {
   }, []);
   const getRequest = async () => {
     let requestarr = [];
-    const getSize = await contract.methods.getSizeOffetchRequests().call();
+    //update address
+    const getSize = await contract.methods.getSizeOffetchRequests(id).call();
     console.log(getSize);
     for (let i = 0; i < getSize; i++) {
+      console.log(getSize, "CAME TILL HERE");
       let request = await contract.methods.requests(id, i).call();
-      console.log(request.requestState);
-      console.log(typeof request.requestState);
+      console.log(request);
       if (request.requestState === "0") {
         requestarr.push({ ...request, state: "Created" });
       } else if (request.requestState === "1") {

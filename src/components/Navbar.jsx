@@ -41,12 +41,12 @@ const Navbar = () => {
         </nav>
         <button
           onClick={() => {
-            (!data.address ?  connectWallet(setdata) : disconnectWallet(setdata))
+            (!localStorage.account ?  connectWallet(setdata) : disconnectWallet(setdata))
            
           }}
           class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
         >
-          {(data.address ? data.address.slice(0,10) : <p>Connect to &nbsp;</p>)}
+          {(localStorage.account ? localStorage.account.slice(0,10) : <p>Connect to &nbsp;</p>)}
           <svg
             class="h-4"
             viewBox="0 0 40 38"

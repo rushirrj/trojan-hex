@@ -8,10 +8,10 @@ const CreateSuperVisor = () => {
       address: ""
     });
 
-    const contractAddress = '0x21cb42De23aFac678CeD8482E04D4B3699288767';
+    const contractAddress = '0xEC027ba0434eE04c16425Fb018c72B4e30512B67';
     const contract = intializeContract(abiArray, contractAddress);
-    const adminAddress = getAccountID();
-
+    const adminAddress = localStorage.account;
+    // console.log(adminAddress, "i was here");
     const onChange = (e) =>{
       setinputs({...inputs, [e.target.name]: e.target.value})
     }

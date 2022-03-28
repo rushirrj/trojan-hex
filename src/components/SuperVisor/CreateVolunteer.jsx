@@ -4,16 +4,24 @@ import abiArray from "../../utils/abiArray.json";
 import { getAccountID, intializeContract } from "../../utils/connectWallet";
 import { Link } from "react-router-dom";
 const CreateVolunteer = () => {
+  
+  
   const [inputs, setinputs] = useState({
     name: "",
     address: "",
   });
-  const [adminAddress, setAdminAddress] = useState("");
+
+  let getId;
+ 
+  const [adminAddress, setAdminAddress] = useState(localStorage.account);
   const [volunters, setVolunters] = useState([]);
-  const contractAddress = "0x21cb42De23aFac678CeD8482E04D4B3699288767";
+  const contractAddress = "0xEC027ba0434eE04c16425Fb018c72B4e30512B67";
   const contract = intializeContract(abiArray, contractAddress);
   console.log(adminAddress);
+  
+  
   const onChange = (e) => {
+    // console.log
     setinputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
@@ -41,7 +49,7 @@ const CreateVolunteer = () => {
     for (let i = 0; i < getSize; i++) {
       let volunteer = await contract.methods
         .fetchVolunteers(Supervisor_address, i)
-        .call();
+        .call(); 
       console.log(volunteer);
       let volunteer_name = await contract.methods
         .getVolunteers(volunteer)
@@ -60,6 +68,7 @@ const CreateVolunteer = () => {
     setVolunters(volunteersArr);
   };
   useEffect(() => {
+   
     getAccountID()
       .then((id) => {
         setAdminAddress(id);
@@ -96,6 +105,8 @@ const CreateVolunteer = () => {
                 type="text"
                 id="address"
                 name="address"
+                value={inputs.address}
+                onChange={(e) => onChange(e)}
                 className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
@@ -107,6 +118,8 @@ const CreateVolunteer = () => {
                 type="text"
                 id="name"
                 name="name"
+                value={inputs.name}
+                onChange={(e) => onChange(e)}
                 className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
