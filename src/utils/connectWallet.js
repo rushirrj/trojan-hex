@@ -3,7 +3,7 @@ import abiArray from "./abiArray.json";
 import DisasterCreateABI from "./DisasterCreateABI.json";
 
 const mainContractAddress = "0x251Aa62d5a9f5b28aAb63C65a33FE0a22fC01832";
-const contractAddress = "0x2138770145401C76c2B50CE775AE4c2546F107a2";
+const contractAddress = "0xc226b7A0bf726De824Ef44aac09C29Cd1F6172C7";
 
 export const intializeContract = (abiArray, contractAddress) => {
     const web3 = new Web3(Web3.givenProvider);

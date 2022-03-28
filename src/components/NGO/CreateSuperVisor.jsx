@@ -10,7 +10,7 @@ const CreateSuperVisor = () => {
   });
   const [supervisorM, setSupervisor] = useState([]);
 
-  const contractAddress = "0x2138770145401C76c2B50CE775AE4c2546F107a2";
+  const contractAddress = "0xc226b7A0bf726De824Ef44aac09C29Cd1F6172C7";
   const contract = intializeContract(abiArray, contractAddress);
   const adminAddress = localStorage.account;
   // console.log(adminAddress, "i was here");
