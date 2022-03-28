@@ -6,6 +6,7 @@ import Steps from '../components/Homepage/Steps';
 const Home = () => {
     return (
         <div className="h-10">
+            
             <Hero/>
             <Steps />
         </div>

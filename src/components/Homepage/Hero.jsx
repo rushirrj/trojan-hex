@@ -31,6 +31,7 @@ const Hero = () => {
               alt="hero"
               src="/home.jpeg"
               // src="/home3.jpeg"
+              
             />
           </div>
         </div>
