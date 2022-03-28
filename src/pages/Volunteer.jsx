@@ -18,10 +18,15 @@ const Volunteer = () => {
     getHours(sAddress, adminAddress);
   }, []);
   const redeemHours = async (Supervisor_address) => {
-    const redeemedHours = await contract.methods
+    await contract.methods
       .redeemHours(Supervisor_address)
-      .send({ from: adminAddress });
-    console.log(redeemedHours);
+      .send({ from: adminAddress })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <section className="text-gray-600 body-font">
@@ -38,7 +43,12 @@ const Volunteer = () => {
           <p class="mb-8 leading-relaxed">No. of Hours Voluntered : {vhrs}</p>
           <div class="flex w-full justify-center items-end"></div>
           <div className="flex">
-            <button className="bg-gray-100 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
+            <button
+              onClick={() => {
+                redeemHours(sAddress);
+              }}
+              className="bg-gray-100 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
