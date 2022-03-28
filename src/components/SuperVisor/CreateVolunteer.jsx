@@ -4,22 +4,19 @@ import abiArray from "../../utils/abiArray.json";
 import { getAccountID, intializeContract } from "../../utils/connectWallet";
 import { Link } from "react-router-dom";
 const CreateVolunteer = () => {
-  
-  
   const [inputs, setinputs] = useState({
     name: "",
     address: "",
   });
 
   let getId;
- 
+
   const [adminAddress, setAdminAddress] = useState(localStorage.account);
   const [volunters, setVolunters] = useState([]);
   const contractAddress = "0xEC027ba0434eE04c16425Fb018c72B4e30512B67";
   const contract = intializeContract(abiArray, contractAddress);
   console.log(adminAddress);
-  
-  
+
   const onChange = (e) => {
     // console.log
     setinputs({ ...inputs, [e.target.name]: e.target.value });
@@ -27,10 +24,27 @@ const CreateVolunteer = () => {
 
   //form create volunteer
   const createVolunteer = async (address, name) => {
-    const createNewVolunteer = await contract.methods
+    await contract.methods
       .appointVolunteers(address, name)
-      .send({ from: adminAddress });
-    console.log(createNewVolunteer);
+      .send({ from: adminAddress })
+      .then((res) => {
+        console.log(res);
+        if (res.status) {
+          setVolunters([
+            ...volunters,
+            {
+              volunteerID: address,
+              volunteerName: name,
+              volunteerHours: 0,
+            },
+          ]);
+        } else {
+          console.log("Something went wrong while creating volunteer");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   //button to recieve
@@ -49,7 +63,7 @@ const CreateVolunteer = () => {
     for (let i = 0; i < getSize; i++) {
       let volunteer = await contract.methods
         .fetchVolunteers(Supervisor_address, i)
-        .call(); 
+        .call();
       console.log(volunteer);
       let volunteer_name = await contract.methods
         .getVolunteers(volunteer)
@@ -68,15 +82,7 @@ const CreateVolunteer = () => {
     setVolunters(volunteersArr);
   };
   useEffect(() => {
-   
-    getAccountID()
-      .then((id) => {
-        setAdminAddress(id);
-        getAllVolunteers(id);
-      })
-      .catch((err) => {
-        console.log(err + "Something went wrong");
-      });
+    getAllVolunteers(adminAddress);
   }, []);
 
   return (
