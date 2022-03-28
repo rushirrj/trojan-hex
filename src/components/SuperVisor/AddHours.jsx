@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const AddHours = () => {
   const [inputs, setinputs] = useState({
     address: "",
-    amount: 0   
+    amount: 0,
   });
 
   let getId;
@@ -24,12 +24,11 @@ const AddHours = () => {
   };
 
   const addCommunityHours = async (address, amount) => {
-    const addedHours = await contract.methods.addHours(address, amount).send({from : adminAddress});
+    const addedHours = await contract.methods
+      .addHours(address, amount)
+      .send({ from: adminAddress });
     console.log(addedHours);
-  }
-
-  
-
+  };
 
   return (
     <>
@@ -37,9 +36,8 @@ const AddHours = () => {
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-col text-center w-full mb-12">
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-             Add Work Hours to Volunteers
+              Add Work Hours to Volunteers
             </h1>
-
           </div>
           <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
             <div className="relative flex-grow w-full">
@@ -60,7 +58,7 @@ const AddHours = () => {
             </div>
             <div className="relative flex-grow w-full">
               <label for="email" className="leading-7 text-sm text-gray-600">
-                Name
+                No of hours
               </label>
               <input
                 type="text"
@@ -82,7 +80,6 @@ const AddHours = () => {
           </div>
         </div>
       </section>
-    
     </>
   );
 };

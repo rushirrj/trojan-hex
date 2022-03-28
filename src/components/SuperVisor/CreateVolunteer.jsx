@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import abiArray from "../../utils/abiArray.json";
 import { getAccountID, intializeContract } from "../../utils/connectWallet";
 import { Link } from "react-router-dom";
+import AddHours from "./AddHours";
 const CreateVolunteer = () => {
   const [inputs, setinputs] = useState({
     name: "",
@@ -58,7 +59,7 @@ const CreateVolunteer = () => {
       let volunteer = await contract.methods
         .fetchVolunteers(Supervisor_address, i)
         .call();
-      console.log(volunteer);
+      console.log(volunteer+"id");
       let volunteer_name = await contract.methods
         .getVolunteers(volunteer)
         .call();
@@ -171,6 +172,7 @@ const CreateVolunteer = () => {
             </svg>
           </Link>
         </div>
+        <AddHours/>
         <table className="table-auto w-full text-left whitespace-no-wrap">
           <thead>
             <tr>
