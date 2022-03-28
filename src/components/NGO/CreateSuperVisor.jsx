@@ -8,7 +8,7 @@ const CreateSuperVisor = () => {
       address: ""
     });
 
-    const contractAddress = '0xEC027ba0434eE04c16425Fb018c72B4e30512B67';
+    const contractAddress = '0xCD389CB27875Be5E6260D67208B061f583dC5C64';
     const contract = intializeContract(abiArray, contractAddress);
     const adminAddress = localStorage.account;
     // console.log(adminAddress, "i was here");
